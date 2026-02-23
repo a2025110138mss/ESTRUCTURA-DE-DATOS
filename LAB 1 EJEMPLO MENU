@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <stdlib.h> //libreria para correr comandos de windows
 using namespace std;
 int suma(int a, int b);
 int mayor(int a, int b, int c);
@@ -8,6 +9,7 @@ double pesototal(int cantidadProductos);
 
 int main() {
 	int opcion,a,b;
+	system("color 5");
 
 	do {
 		cout << "1. La suma de dos numeros" << endl;
@@ -25,7 +27,7 @@ int main() {
 			cout << "Ingresar el segundo numero: ";
 			cin >> b;
 			cout << "El resultado es: " << suma(a, b) << endl;
-		
+			break;
 		case 2: {
 			int c = 0, m;
 			cout << "Introduce el primer número: ";
@@ -59,6 +61,8 @@ int main() {
 			cout << "Opción no válida. Intenta de nuevo.\n";
 			break;
 		}
+		system("pause");
+		system("cls");
 
 	} while (opcion != 0);
 
