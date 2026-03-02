@@ -1,0 +1,78 @@
+#include <iostream>
+#include <cmath>
+#include <stdlib.h> //libreria para correr comandos de windows
+using namespace std;
+int factorial(int n);
+int sumanaturales(int a);
+int suma(int n);
+
+int main() {
+	int opcion, a, b;
+	system("color 2");
+
+	do {
+		cout << "1. Factorial" << endl;
+		cout << "2. Calcular la suma natural" << endl;
+		cout << "3. Calcular la suma de los N primeros numeros" << endl;
+		cout << "0. Salir" << endl;
+		cout << "Opcion: ";
+		cin >> opcion;
+
+		switch (opcion) {
+		case 1:
+			int num;
+			cout << "Ingresar el numero a calcular: ";
+			cin >> num;
+			cout << "El factorial de " << num << " es : " << factorial(num) << endl;
+			break;
+		case 2: {
+			int a;
+			cout << "Introduce un numero: ";
+			cin >> a;
+			cout << "La suma de " << a << " es : " << sumanaturales(a) << endl;
+			break;
+		}
+		case 3: {
+			int n;
+			cout << "Ingrese un numero: ";
+			cin >> n;
+			cout << "La suma es: " << suma(n) << endl;
+			break;
+		}
+		case 0:
+			cout << "¡Hasta luego!\n";
+			return 0;
+			break;
+		default:
+			cout << "Opcion no valida. Intenta de nuevo." << endl;
+			break;
+		}
+		system("pause");
+		system("cls");
+
+	} while (opcion != 0);
+
+	return 0;
+}
+
+int sumanaturales(int a) {
+	if (a == 1)
+		return 1;
+	else
+		return a + sumanaturales(a - 1);
+}
+int suma(int n) {
+	if (n == 1)
+		return 1;
+	else
+		return n + suma(n - 1);
+	
+}
+
+int factorial(int n) {
+	if ((n == 0) || (n == 1))
+		return 1;
+	else
+		return factorial(n - 1) * n;
+}
+
