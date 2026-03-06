@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double a, b, c, d, x1, x2;
+
+    cout << "Ingrese el valor de a: ";
+    cin >> a;
+
+    if (a != 0) {
+        cout << "Ingrese el valor de b: ";
+        cin >> b;
+
+        cout << "Ingrese el valor de c: ";
+        cin >> c;
+
+        d = b*b - 4*a*c;
+
+        if (d > 0) {
+            x1 = (-b + sqrt(d)) / (2*a);
+            x2 = (-b + sqrt(d)) / (2*a);
+
+            cout << "Raices reales: x1= " << x1 << " x2= " << x2 << endl;
+        }
+        else {
+            if (d == 0) {
+                cout << "Raiz unica: " << -b/(2*a) << endl;
+            }
+            else {
+                cout << "Raiz imaginaria x1= " << -b/(2*a) << "+" 
+                     << sqrt(-d)/(2*a) << "i" << endl;
+
+                cout << "Raiz imaginario x2= " << -b/(2*a) << "-" 
+                     << sqrt(-d)/(2*a) << "i" << endl;
+            }
+        }
+    }
+    else {
+        cout << "Error la solucion no existe" << endl;
+    }
+
+    return 0;
+}
