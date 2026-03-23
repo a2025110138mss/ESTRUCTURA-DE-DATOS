@@ -1,0 +1,105 @@
+#include <iostream>
+#define MAXCOL 20
+#define MAXROW 20
+
+using namespace std;
+
+void cargar(int matrix[MAXROW][MAXCOL], int n, int m);
+void mostrar(int matrix[MAXROW][MAXCOL], int n, int m);
+void transpuesta(int matrix[MAXROW][MAXCOL], int &n, int &m);
+
+int main()
+{
+    int tamrow, tamcol, matriz[MAXROW][MAXCOL];
+    int op;
+
+    do {
+        cout << "Ingrese el numero de filas: ";
+        cin >> tamrow;
+    } while ((tamrow <= 0) || (tamrow > MAXROW));
+
+    do {
+        cout << "Ingrese el numero de columnas: ";
+        cin >> tamcol;
+    } while ((tamcol <= 0) || (tamcol > MAXCOL));
+
+    do {
+        cout << "\n***MENU***" << endl;
+        cout << "1. Cargar matriz" << endl;
+        cout << "2. Mostrar matriz" << endl;
+        cout << "3. Transpuesta" << endl;
+        cout << "0. Salir" << endl;
+        cout << "Escoja una opcion: ";
+        cin >> op;
+
+        switch (op)
+        {
+        case 1:
+            cout << "Eligio cargar" << endl;
+            cargar(matriz, tamrow, tamcol);
+            break;
+
+        case 2:
+            cout << "Eligio mostrar" << endl;
+            mostrar(matriz, tamrow, tamcol);
+            break;
+
+        case 3:
+            cout << "Eligio transponer matriz" << endl;
+            transpuesta(matriz, tamrow, tamcol);
+            break;
+
+        case 0:
+            cout << "Saliendo..." << endl;
+            break;
+
+        default:
+            cout << "Opcion invalida" << endl;
+        }
+
+    } while (op != 0);
+
+    return 0;
+}
+
+void cargar(int matrix[MAXROW][MAXCOL], int n, int m) {
+    for (int i = 0; i < n; i++) 
+        for (int j = 0; j < m; j++) {
+            cout << "matriz[" << i + 1 << "][" << j + 1 << "]: ";
+            cin >> matrix[i][j];
+        }
+}
+
+void mostrar(int matrix[MAXROW][MAXCOL], int n, int m) {
+    cout << "\nMatriz:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cout << matrix[i][j] << "\t";
+        }
+        cout << endl;
+    }
+}
+
+void transpuesta(int matrix[MAXROW][MAXCOL], int &n , int &m) {
+    int aux;
+
+    
+    if (n != m) {
+        cout << "La matriz no es cuadrada, pero se intercambiaran dimensiones.\n";
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i; j < m; j++) {  
+            aux = matrix[i][j];
+            matrix[i][j] = matrix[j][i];
+            matrix[j][i] = aux;
+        }
+    }
+
+    
+    aux = n;
+    n = m;
+    m = aux;
+
+    cout << "Transpuesta realizada.\n";
+}
