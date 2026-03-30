@@ -1,0 +1,201 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Prototipos
+int contarVocales(string texto);
+int longitud(string texto);
+string extraer(string texto, int inicio, int cantidad);
+void intercambio(string& a, string& b);
+int comparar(string a, string b);
+int encontrar(string texto, char c);
+string invertir(string texto);
+bool capicua(string texto);
+string quitarVocales(string texto);
+
+int main() {
+    int op;
+
+    do {
+        cout << "\n1. Contar vocales" << endl;
+        cout << "2. Longitud de un string" << endl;
+        cout << "3. Extraer una parte" << endl;
+        cout << "4. Intercambio de string" << endl;
+        cout << "5. Comparar string" << endl;
+        cout << "6. Encontrar un caracter" << endl;
+        cout << "7. Invertir" << endl;
+        cout << "8. Determinar si es capicua" << endl;
+        cout << "9. Quitar vocales" << endl;
+        cout << "0. SALIR" << endl;
+        cout << "Ingrese opcion: ";
+        cin >> op;
+
+        string a, b, texto;
+        int inicio, cantidad;
+        char c;
+
+        switch (op) {
+        case 1:
+            cout << "Ingrese texto: ";
+            cin >> texto;
+            cout << "Vocales: " << contarVocales(texto) << endl;
+            break;
+
+        case 2:
+            cout << "Ingrese texto: ";
+            cin >> texto;
+            cout << "Longitud: " << longitud(texto) << endl;
+            break;
+
+        case 3:
+            cout << "Ingrese texto: ";
+            cin >> texto;
+            cout << "Inicio: ";
+            cin >> inicio;
+            cout << "Cantidad: ";
+            cin >> cantidad;
+            cout << "Subcadena: " << extraer(texto, inicio, cantidad) << endl;
+            break;
+
+        case 4:
+            cout << "String 1: ";
+            cin >> a;
+            cout << "String 2: ";
+            cin >> b;
+            intercambio(a, b);
+            cout << "Nuevo 1: " << a << endl;
+            cout << "Nuevo 2: " << b << endl;
+            break;
+
+        case 5:
+            cout << "Texto 1: ";
+            cin >> a;
+            cout << "Texto 2: ";
+            cin >> b;
+            int r;
+            r = comparar(a, b);
+            if (r == 0) cout << "Iguales\n";
+            else if (r > 0) cout << "Mayor: primero\n";
+            else cout << "Mayor: segundo\n";
+            break;
+
+        case 6:
+            cout << "Ingrese texto: ";
+            cin >> texto;
+            cout << "Caracter: ";
+            cin >> c;
+            int pos;
+            pos = encontrar(texto, c);
+            if (pos != -1)
+                cout << "Encontrado en posicion: " << pos << endl;
+            else
+                cout << "No encontrado\n";
+            break;
+
+        case 7:
+            cout << "Ingrese texto: ";
+            cin >> texto;
+            cout << "Invertido: " << invertir(texto) << endl;
+            break;
+
+        case 8:
+            cout << "Ingrese texto: ";
+            cin >> texto;
+            if (capicua(texto))
+                cout << "Es capicua\n";
+            else
+                cout << "No es capicua\n";
+            break;
+
+        case 9:
+            cout << "Ingrese texto: ";
+            cin >> texto;
+            cout << "Sin vocales: " << quitarVocales(texto) << endl;
+            break;
+
+        case 0:
+            cout << "Saliendo...\n";
+            break;
+
+        default:
+            cout << "Opcion invalida\n";
+        }
+
+    } while (op != 0);
+
+    return 0;
+}
+
+// FUNCIONES
+
+int contarVocales(string texto) {
+    int vocales = 0;
+    for (int i = 0; i < texto.length(); i++) {
+        char c = texto[i];
+        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ||
+            c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U')
+            vocales++;
+    }
+    return vocales;
+}
+
+int longitud(string texto) {
+    return texto.length();
+}
+
+string extraer(string texto, int inicio, int cantidad) {
+    string sub = "";
+    for (int i = inicio; i < inicio + cantidad && i < texto.length(); i++) {
+        sub += texto[i];
+    }
+    return sub;
+}
+
+void intercambio(string& a, string& b) {
+    string temp = a;
+    a = b;
+    b = temp;
+}
+
+int comparar(string a, string b) {
+    if (a == b) return 0;
+    if (a > b) return 1;
+    return -1;
+}
+
+int encontrar(string texto, char c) {
+    for (int i = 0; i < texto.length(); i++) {
+        if (texto[i] == c)
+            return i;
+    }
+    return -1;
+}
+
+string invertir(string texto) {
+    string inv = "";
+    for (int i = texto.length() - 1; i >= 0; i--) {
+        inv += texto[i];
+    }
+    return inv;
+}
+
+bool capicua(string texto) {
+    int n = texto.length();
+    for (int i = 0; i < n / 2; i++) {
+        if (texto[i] != texto[n - 1 - i])
+            return false;
+    }
+    return true;
+}
+
+string quitarVocales(string texto) {
+    string res = "";
+    for (int i = 0; i < texto.length(); i++) {
+        char c = texto[i];
+        if (!(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ||
+            c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U'))
+            res += c;
+    }
+    return res;
+}
