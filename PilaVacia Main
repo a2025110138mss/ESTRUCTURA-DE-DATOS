@@ -1,0 +1,13 @@
+#include <iostream>
+#include "Pila.h"
+using namespace std;
+
+int main()
+{
+    Pila p;
+    if (p.PilaVacia())
+        cout << "pila.vacia" << endl;
+    else
+        cout << "La pila no esta vacia";
+    return 0;
+}
