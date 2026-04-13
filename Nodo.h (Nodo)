@@ -1,0 +1,16 @@
+#pragma once
+#include <string>
+using namespace std;
+
+class Nodo {
+public:
+    int dato;
+    string nombre;
+    Nodo* sig;
+
+    Nodo(int d, string n) {
+        dato = d;
+        nombre = n;
+        sig = NULL;
+    }
+};
