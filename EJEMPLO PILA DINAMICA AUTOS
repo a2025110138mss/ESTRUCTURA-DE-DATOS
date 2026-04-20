@@ -1,0 +1,160 @@
+#pragma once
+#include <string>
+using namespace std;
+class nodo
+{
+	public:
+		char placa;
+		int ano;
+		string marca;
+		float km;
+		char modelo;
+		nodo *sig;
+
+};
+
+#pragma once
+#include <string>
+#include "nodo.h"
+using namespace std;
+
+class Pila
+{
+	nodo *inicio; 
+public:
+	Pila(){
+		inicio = NULL;
+	}
+	void push();
+	void pop();
+	void show();
+	void top();
+	void size();
+
+};
+
+#include "Pila.h"
+#include "nodo.h"
+#include <iostream>
+using namespace std;
+
+void Pila::push() {
+	nodo* nuevo = new nodo();
+
+	cout << "Ingrese placa: " << endl;
+	cin >> nuevo->placa;
+	cout << "Ingrese año: " << endl;
+	cin >> nuevo->ano;
+	cout << "Ingrese marca: " << endl;
+	cin >> nuevo->marca;
+	cout << "Ingrese km: " << endl;
+	cin >> nuevo->km;
+	cout << "Ingrese modelo: " << endl;
+	cin >> nuevo->modelo;
+
+	nuevo->sig = inicio;
+	inicio = nuevo;
+
+	cout << "Elemento agregado a la pila.\n";
+}
+
+void Pila::pop() {
+	if (inicio == NULL) {
+		cout << "La pila esta vacia.\n";
+		return;
+	}
+
+	nodo* aux = inicio;
+	inicio = inicio->sig;
+	delete aux;
+
+	cout << "Elemento eliminado de la pila.\n";
+}
+
+void Pila::show() {
+	if (inicio == NULL) {
+		cout << "La pila esta vacia.\n";
+		return;
+	}
+
+	nodo* aux = inicio;
+	while (aux != NULL) {
+		cout << "Placa: " << aux->placa << endl;
+		cout << "Año: " << aux->ano << endl;
+		cout << "Marca: " << aux->marca << endl;
+		cout << "Km: " << aux->km << endl;
+		cout << "Modelo: " << aux->modelo << endl;
+		cout << "------------------\n";
+		aux = aux->sig;
+	}
+}
+
+void Pila::top() {
+	if (inicio == NULL) {
+		cout << "La pila esta vacia.\n";
+		return;
+	}
+
+	cout << "Elemento en la cima:\n";
+	cout << "Placa: " << inicio->placa << endl;
+	cout << "Año: " << inicio->ano << endl;
+	cout << "Marca: " << inicio->marca << endl;
+	cout << "Km: " << inicio->km << endl;
+	cout << "Modelo: " << inicio->modelo << endl;
+}
+
+void Pila::size() {
+	int contador = 0;
+	nodo* aux = inicio;
+
+	while (aux != NULL) {
+		contador++;
+		aux = aux->sig;
+	}
+
+	cout << "Tamaño de la pila: " << contador << endl;
+}
+#include <iostream>
+#include "nodo.h"
+#include "Pila.h"
+int main() {
+    nodo nuevo;
+    Pila l;
+    int opcion;
+    do {
+        system("cls");
+        cout << "[:]Pila en lista enlazada" << endl;
+        cout << "[1]Push" << endl;
+        cout << "[2]Pop" << endl;
+        cout << "[3]Mostrar" << endl;
+        cout << "[4]Top" << endl;
+        cout << "[5]Size" << endl;
+        cout << "[0]Salir" << endl;
+        cout << "\nIngresa tu opcion: ";
+        cin >> opcion;
+        switch (opcion) {
+        case 1:
+            l.push();
+            break;
+        case 2:
+            l.pop();
+            break;
+        case 3:
+            l.show();
+            break;
+        case 4:
+            l.top();
+            break;
+        case 5:
+            l.size();
+            break;
+        case 0:
+            return 0;
+            break;
+        default:
+            cout << "Por favor ingresa una opcion correcta.\n";
+            break;
+        }
+    } while (opcion != 0);
+    return 0;
+}
