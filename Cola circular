@@ -1,0 +1,112 @@
+#pragma once
+class Nodo
+{
+	typedef char DATA_TYPE;
+
+	class nodo {
+	public:
+		DATA_TYPE data;
+		nodo* next;
+	};
+};
+
+
+#pragma once
+#include "Nodo.h"
+
+class QueueDin
+{
+private:
+    int ITEMS;
+    int ITEMSIZE;
+    Nodo* cola;
+    Nodo* cabeza;
+
+public:
+    QueueDin();
+    ~QueueDin();
+
+    DATA_TYPE put(DATA_TYPE valor);
+    int empty();
+    DATA_TYPE get();
+};
+#include "QueueDin.h"
+#include "Nodo.h"
+
+// constructor
+QueueDin::QueueDin() : cola(nullptr), cabeza(nullptr), ITEMS(0), ITEMSIZE(sizeof(DATA_TYPE)) {}
+
+// destructor
+QueueDin::~QueueDin() {
+    while (!empty()) {
+        get();
+    }
+}
+
+// agregar elemento
+DATA_TYPE QueueDin::put(DATA_TYPE valor)
+{
+    Nodo* temp = new Nodo;
+    if (temp == nullptr) return -1;
+
+    ITEMS++;
+    temp->data = valor;
+    temp->next = nullptr;
+
+    if (cabeza == nullptr)
+    {
+        cabeza = temp;
+        cola = temp;
+    }
+    else
+    {
+        cola->next = temp;
+        cola = temp;
+    }
+
+    return valor;
+}
+
+// verificar si está vacía
+int QueueDin::empty()
+{
+    return ITEMS == 0;
+}
+
+// retirar elemento
+DATA_TYPE QueueDin::get()
+{
+    if (empty()) return -1;
+
+    Nodo* temp = cabeza;
+    DATA_TYPE d = cabeza->data;
+
+    cabeza = cabeza->next;
+    delete temp;
+
+    ITEMS--;
+
+    return d;
+}
+#include <iostream>
+#include "QueueDin.h"
+
+using namespace std;
+
+int main()
+{
+    QueueDin s;
+    DATA_TYPE d;
+
+    for (d = 'A'; d <= 'Z'; d++) {
+        s.put(d);
+        cout << d << " ";
+    }
+
+    cout << endl;
+
+    while (!s.empty())
+        cout << s.get() << " ";
+
+    return 0;
+}
