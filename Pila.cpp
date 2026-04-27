@@ -68,6 +68,12 @@ void Pila::LimpiarPila()
 
 bool Pila::Iguales(Pila p)
 {
-     
-    return false;
+    if (cima != p.cima)
+        return false;
+    for(int i=0; i<=cima; i++)
+    {
+        if(pila[i] != p.pila[i])
+           return false;
+    }
+    return true;
 }
